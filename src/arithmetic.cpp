@@ -1,18 +1,16 @@
 // реализаци€ функций и классов дл€ вычислени€ арифметических выражений
-#include "arithmetic.h"
+#include "..\include\arithmetic.h"
 
 
 Lexem::Lexem()
 {
 	type = VAR;
-	//val = 0;
 }
 
 Lexem::Lexem(const string& str)
 {
 	value = stod(str);
 	type = VAL;
-	symbol = str;
 }
 
 
@@ -44,18 +42,6 @@ Lexem::Lexem(const char a)
 			type=UNKNOWN;
 	}
 
-
-	/*value =operators.find(a);
-
-	if (value == operators.npos)
-	type = UNKNOWN;
-	else
-	if (value < 4)
-	type = OP;
-	else if (value == 4)
-	type = OP_BR;
-	else type = CL_BR;
-	symbol = a;*/
 }
 
 
@@ -91,7 +77,7 @@ Arithmetic::Arithmetic(const string& str)
 	nPolish=0;	
 }
 
-void Arithmetic::DivideToinputLexems()//разбиение  входной строки на массив лексем(определ€€ количество).
+void Arithmetic::DivideToinputLexems()																									//разбиение  входной строки на массив лексем(определ€€ количество).
 {
 	int i = 0;
 	int k=inputStr.length();
@@ -100,14 +86,14 @@ void Arithmetic::DivideToinputLexems()//разбиение  входной строки на массив лекс
 		char a = inputStr[i];
 
 
-		if ((operators.find(a) != string::npos)||(isalpha(a)))// если оператор найден
+		if ((operators.find(a) != string::npos)||(isalpha(a)))																			// если оператор найден
 		{	Lexem d(a);
 		inputLexems[nLex] =d; 
 		nLex++;
 
 		}
 		else 
-			if (isdigit(a)) //цифра,начина€ с которой будет число
+			if (isdigit(a))																												//цифра,начина€ с которой будет число
 			{
 				string x;
 				int j = i;
@@ -137,10 +123,7 @@ void Arithmetic::DivideToinputLexems()//разбиение  входной строки на массив лекс
 
 }
 
-	/*if (i != inputStr.length()) 
-	throw "Don'tDivideLexem";*/
-
-void Arithmetic::Change() //возвращает позицию ошибки 
+void Arithmetic::Change()																										//возвращает позицию ошибки 
 {
 	for (int i = 0; i < nLex; i++)
 	{
@@ -298,8 +281,7 @@ int Arithmetic::CheckPoints(const string& str)
  int Arithmetic::CheckBrackets()
  {
  	int Br = 0, s = 0;
- 
- 	bool flag = true;
+  	bool flag = true;
  	for (int i = 0; i < nLex && Br >= 0; i++)
  	{
  		if (inputLexems[i].type == OP_BR)
@@ -396,13 +378,3 @@ int Arithmetic::CheckPoints(const string& str)
 
 
 
-
-/*double Arithmetic::Calc(const string& s)
-{
-	double res = 0.0;
-	Arithmetic a(s);
-	a.Check();
-	a.ConvertToPolish();
-	res = a.Calculate();
-	return res;
-}*/
